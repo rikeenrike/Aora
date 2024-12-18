@@ -1,0 +1,71 @@
+// import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+// import React, { useState, useEffect } from 'react';
+// import directus from '@/lib/directus';
+// import { readItems } from '@directus/sdk';
+
+// async function getGlobals() {
+//     try {
+//         return await directus.request(readItems('global'));
+//     } catch (error) {
+//         console.error('Error fetching globals:', error);
+//         return null;
+//     }
+// }
+
+
+// const DirectusTest = () => {
+//     const [globalData, setGlobalData] = useState<Record<string, any> | null>(null);
+//     const [loading, setLoading] = useState(true);
+
+//     useEffect(() => {
+//         async function fetchData() {
+//             const data = await getGlobals();
+//             setGlobalData(data);
+//             setLoading(false);
+//         }
+
+//         fetchData();
+//     }, []);
+
+//     if (loading) {
+//         return (
+//             <View style={styles.container}>
+//                 <ActivityIndicator size="large" color="#0000ff" />
+//             </View>
+//         );
+//     }
+
+//     if (!globalData) {
+//         return (
+//             <View style={styles.container}>
+//                 <Text>No global data available.</Text>
+//             </View>
+//         );
+//     }
+//     return (
+//         <View style={styles.container}>
+//             <Text style={styles.title}>{globalData.title || 'No title available'}</Text>
+//             <Text style={styles.description}>{globalData.description || 'No description available'}</Text>
+//         </View>
+//     );
+// };
+
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//         padding: 16,
+//     },
+//     title: {
+//         fontSize: 24,
+//         fontWeight: 'bold',
+//         marginBottom: 8,
+//     },
+//     description: {
+//         fontSize: 16,
+//         color: '#555',
+//     },
+// });
+
+// export default DirectusTest;

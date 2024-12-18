@@ -109,7 +109,7 @@ const TabsLayout = () => {
           }}
         />
 
-        <Tabs.Screen
+        {/* <Tabs.Screen
           name='directustest'
           options={{
             title: 'DirectusTest',
@@ -123,7 +123,7 @@ const TabsLayout = () => {
                 />
             )
           }}
-        />
+        /> */}
 
       </Tabs>
     </>

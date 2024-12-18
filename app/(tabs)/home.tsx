@@ -8,20 +8,23 @@ import EmptyState from '@/components/EmptyState';
 import { getallPost, getLatestPost } from '@/lib/appwrite';
 import { useAppwritehook } from '@/hooks/useAppwritehook';
 import VideoCard from '@/components/VideoCard';
+import { useGlobalContext } from '@/context/globalprovider';
+
+
+
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false)
   const { data: posts, refetch } = useAppwritehook(getallPost)
   const { data: latestposts } = useAppwritehook(getLatestPost)
-
+  const { user } = useGlobalContext();
 
   const onRefresh = async () => {
     setRefreshing(true)
     console.log('refreshing')
     await refetch()
-    setRefreshing(false) 
+    setRefreshing(false)
   }
-
 
 
   return (
@@ -30,8 +33,8 @@ const Home = () => {
         data={Array.isArray(posts) ? posts : []}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          
-          <VideoCard 
+
+          <VideoCard
             video={item}
           />
         )}
@@ -43,11 +46,11 @@ const Home = () => {
                   Welcome back
                 </Text>
                 <Text className='text-2xl font-semibold text-gray-100'>
-                  John Doe
+                  {user?.username}
                 </Text>
               </View>
               <View className='mt-1.5'>
-                <Image 
+                <Image
                   source={images.logoSmall}
                   className='w-9 h-10'
                   resizeMode='contain'
@@ -55,20 +58,20 @@ const Home = () => {
               </View>
             </View>
 
-          <SearchInput />
+            <SearchInput />
 
-          <View className='w-full flex-1 pt-5 pb-8'>
-            <Text className='text-gray-100 text-lg font-pregular mb-3'>Latest Videos</Text>
-            <Trending 
-              posts={Array.isArray(latestposts) ? latestposts : []}
-              
-            />
-          </View>
+            <View className='w-full flex-1 pt-5 pb-8'>
+              <Text className='text-gray-100 text-lg font-pregular mb-3'>Latest Videos</Text>
+              <Trending
+                posts={Array.isArray(latestposts) ? latestposts : []}
+
+              />
+            </View>
 
           </View>
         )}
         ListEmptyComponent={() => (
-          <EmptyState 
+          <EmptyState
             title='No videos found'
             description='There are no videos available at the moment.'
           />
@@ -76,10 +79,10 @@ const Home = () => {
         }
 
         refreshControl={
-          <RefreshControl 
+          <RefreshControl
             refreshing={refreshing}
-            onRefresh={onRefresh} 
-          /> 
+            onRefresh={onRefresh}
+          />
         }
       />
     </SafeAreaView>

@@ -133,3 +133,22 @@ export const searchPosts = async (query: any) => {
         console.log(e);
     }
 }
+
+export const getUserPosts = async (userId: any) => {
+    try {
+        const posts = await databases.listDocuments(databaseId, videocollectionId, [Query.equal('users', userId)]);
+        return posts.documents;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+
+export const signOut = async () => {
+    try {
+        const session = await account.deleteSession('current');
+        return session;
+    } catch (e) {
+        console.log(e);
+    }
+}
